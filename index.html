@@ -6,310 +6,140 @@
 <title>vyxbio</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-height:100vh;
-overflow:hidden;
-background:url("https://fons.grizly.club/uploads/posts/2025-06/26/1750922654029.jpg") center center no-repeat;
-background-size:cover;
-color:white;
-position:relative;
+body {
+    font-family: Arial, sans-serif;
+    background: url('bg.jpg') center center / cover no-repeat fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
-/* затемнение */
-body::before{
-content:"";
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.75);
-z-index:0;
+/* затемнение фона */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: -1;
 }
 
-/* слайдер */
-.slider-wrapper{
-width:100vw;
-height:100vh;
-overflow:hidden;
-position:relative;
-z-index:1;
+.card/compilerಗೆeslug;
+
+.card {
+    width: 90%;
+    max-width: 600px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+    animation: fadeIn 1s ease forwards;
 }
 
-.slider{
-display:flex;
-width:200vw;
-height:100%;
-transition:transform 0.6s ease;
+/* убрали overflow и height полностью */
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
 
-.slide{
-width:100vw;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
+h2 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    opacity: 0.8;
 }
 
-.card{
-width:100%;
-max-width:820px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(14px);
-padding:40px;
-border-radius:28px;
-box-shadow:0 0 60px rgba(0,0,0,0.7);
-overflow-y:auto;
-max-height:88vh;
+p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: textAppear 0.6s ease forwards;
 }
 
-/* текст */
-.card h1{
-margin-bottom:25px;
-font-size:28px;
-text-shadow:0 0 14px rgba(255,255,255,0.35);
+p:nth-child(1) { animation-delay: 0.1s; }
+p:nth-child(2) { animation-delay: 0.2s; }
+p:nth-child(3) { animation-delay: 0.3s; }
+p:nth-child(4) { animation-delay: 0.4s; }
+p:nth-child(5) { animation-delay: 0.5s; }
+p:nth-child(6) { animation-delay: 0.6s; }
+
+.telegram-btn {
+    margin-top: 25px;
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 40px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
 }
 
-.card p{
-opacity:0;
-transform:translateY(15px);
-animation:fadeUp 0.7s forwards;
-margin-bottom:10px;
-line-height:1.6;
-text-shadow:0 0 6px rgba(255,255,255,0.25);
-animation-delay:calc(var(--i) * 0.07s);
+.telegram-btn:hover {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-@keyframes fadeUp{
-to{
-opacity:1;
-transform:translateY(0);
-}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-a{
-color:#8fb3ff;
-text-decoration:none;
+@keyframes textAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-a:hover{
-text-decoration:underline;
-}
+/* Адаптация под телефон */
+@media (max-width: 600px) {
+    .card {
+        padding: 25px;
+    }
 
-/* Telegram */
-.telegram-btn{
-margin-top:20px;
-display:inline-block;
-padding:10px 22px;
-border-radius:25px;
-border:1px solid rgba(255,255,255,0.3);
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(10px);
-color:white;
-text-decoration:none;
-transition:0.3s;
-}
-
-.telegram-btn:hover{
-background:rgba(255,255,255,0.18);
-box-shadow:0 0 20px rgba(120,170,255,0.5);
-}
-
-/* точки */
-.dots{
-position:fixed;
-bottom:25px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:12px;
-z-index:3;
-}
-
-.dot{
-width:10px;
-height:10px;
-border-radius:50%;
-background:rgba(255,255,255,0.3);
-cursor:pointer;
-transition:0.3s;
-}
-
-.dot.active{
-background:white;
-box-shadow:0 0 10px white;
-}
-
-/* музыка */
-.music-btn{
-position:fixed;
-top:20px;
-left:20px;
-z-index:4;
-background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.2);
-color:white;
-padding:8px 16px;
-border-radius:20px;
-cursor:pointer;
-backdrop-filter:blur(8px);
-transition:0.3s;
-}
-
-.music-btn:hover{
-background:rgba(255,255,255,0.15);
-}
-
-/* мобилка */
-@media (max-width:768px){
-
-body{
-background-attachment:scroll;
-}
-
-.card{
-max-width:100%;
-padding:24px;
-max-height:85vh;
-border-radius:20px;
-}
-
-.card h1{
-font-size:22px;
-}
-
+    h1 {
+        font-size: 22px;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<button class="music-btn" onclick="toggleMusic()">Музыка</button>
-
-<audio id="bgMusic" src="music.mp3" loop></audio>
-
-<div class="slider-wrapper">
-<div class="slider" id="slider">
-
-<!-- Слайд 1 -->
-<div class="slide">
 <div class="card">
-<h1>#vyxbio analytics</h1>
+    <h1>#vyxbio analytics</h1>
 
-<p style="--i:1">РАССЛЕДОВАНИЯ</p>
-<p style="--i:2">Экспресс-проверка личности: 9.99 USDT</p>
-<p style="--i:3">Полное досье (соцсети/связи): 24.99 USDT</p>
-<p style="--i:4">Мониторинг и история активности: 44.99 USDT</p>
+    <h2>РАССЛЕДОВАНИЯ</h2>
+    <p>Экспресс-проверка личности — 9.99 USDT</p>
+    <p>Полное досье (соцсети/связи) — 24.99 USDT</p>
+    <p>Мониторинг активности — 44.99 USDT</p>
 
-<p style="--i:5">ОБУЧЕНИЕ</p>
-<p style="--i:6">Основы цифрового профилирования — 49.99 USDT</p>
-<p style="--i:7">Персональное наставничество.</p>
-<p style="--i:8">Сбор и анализ открытых источников (OSINT).</p>
-<p style="--i:9">Поиск утечек и метаданных.</p>
-<p style="--i:10">Обучение работе с API и парсерами.</p>
-<p style="--i:11">Практика: восстановление биографии по цифровому следу.</p>
+    <h2>ОБУЧЕНИЕ</h2>
+    <p>Основы цифрового профилирования — 49.99 USDT</p>
+    <p>Сбор и анализ OSINT</p>
+    <p>Работа с API и парсерами</p>
 
-<p style="--i:12">СОФТ ПОД ЗАКАЗ</p>
-<p style="--i:13">Боты/парсеры под твои задачи — от 24.99 USDT</p>
+    <h2>АККАУНТЫ TELEGRAM</h2>
+    <p>+7 — 3.99 USDT</p>
+    <p>+380 — 4.99 USDT</p>
+    <p>+1 — 7.99 USDT</p>
 
-<p style="--i:14">АККАУНТЫ ТЕЛЕГРАМ</p>
-<p style="--i:15">+7 (РФ) — 3.99 USDT</p>
-<p style="--i:16">+380 (Укр) — 4.99 USDT</p>
-<p style="--i:17">+1 (США/Канада) — 7.99 USDT</p>
-
-<p style="--i:18">—</p>
-<p style="--i:19">по вопросам: @vyxeyes</p>
-<p style="--i:20">канал: <a href="https://t.me/vyxedith" target="_blank">https://t.me/vyxedith</a></p>
-
-<a href="https://t.me/vyxedith" target="_blank" class="telegram-btn">Telegram</a>
-
+    <a href="https://t.me/yourusername" class="telegram-btn">Telegram</a>
 </div>
-</div>
-
-<!-- Слайд 2 -->
-<div class="slide">
-<div class="card">
-<h1>#vyxbio network</h1>
-
-<p style="--i:1">ЦИФРОВАЯ АНАЛИТИКА</p>
-<p style="--i:2">Поиск связей и скрытых аккаунтов.</p>
-<p style="--i:3">Анализ цифрового поведения.</p>
-<p style="--i:4">Восстановление удалённых данных.</p>
-
-<p style="--i:5">АРХИВЫ И БАЗЫ</p>
-<p style="--i:6">Работа с кэшами и снапшотами.</p>
-<p style="--i:7">Анализ утечек и метаданных.</p>
-<p style="--i:8">Сопоставление цифровых следов.</p>
-
-<p style="--i:9">ПРИВАТНОСТЬ</p>
-<p style="--i:10">Аудит цифрового профиля.</p>
-<p style="--i:11">Настройка анонимности.</p>
-<p style="--i:12">Защита личных данных.</p>
-
-<p style="--i:13">Работаем строго конфиденциально.</p>
-<p style="--i:14">Индивидуальный подход.</p>
-
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="dots">
-<div class="dot active" onclick="goToSlide(0)"></div>
-<div class="dot" onclick="goToSlide(1)"></div>
-</div>
-
-<script>
-let currentSlide=0;
-const slider=document.getElementById("slider");
-const dots=document.querySelectorAll(".dot");
-
-function goToSlide(index){
-currentSlide=index;
-slider.style.transform=`translateX(-${index*100}vw)`;
-dots.forEach(d=>d.classList.remove("active"));
-dots[index].classList.add("active");
-}
-
-/* свайп */
-let startX=0;
-document.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX;
-});
-
-document.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50) goToSlide(1);
-if(endX-startX>50) goToSlide(0);
-});
-
-/* музыка */
-const music=document.getElementById("bgMusic");
-let playing=false;
-
-function toggleMusic(){
-if(!playing){
-music.volume=0;
-music.play();
-let fade=setInterval(()=>{
-if(music.volume<0.9){
-music.volume+=0.05;
-}else{
-clearInterval(fade);
-}
-},100);
-playing=true;
-}else{
-music.pause();
-playing=false;
-}
-}
-</script>
 
 </body>
 </html>
