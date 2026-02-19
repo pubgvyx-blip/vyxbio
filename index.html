@@ -6,231 +6,171 @@
 <title>Vyxbio</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    color:white;
-    min-height:100vh;
-    overflow:hidden;
-
-    background:url('https://fons.grizly.club/uploads/posts/2025-06/26/1750922652114.jpg') no-repeat center center;
-    background-size:cover;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.65);
-    backdrop-filter: blur(6px);
-    z-index:-1;
+body {
+    background: #000;
+    color: white;
+    overflow: hidden;
 }
 
-.slider-wrapper{
-    width:100%;
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.slider {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.slider{
-    display:flex;
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.6s ease;
-    width:200%;
 }
 
-.card{
-    width:100%;
-    max-width:650px;
-    margin:auto;
-    background:rgba(0,0,0,0.55);
-    backdrop-filter: blur(14px);
-    border-radius:22px;
-    padding:40px;
-    box-shadow:0 0 40px rgba(0,0,0,0.7);
+.slide:nth-child(1) {
+    background: url("bg.jpg") center/cover no-repeat;
 }
 
-.dots{
-    position:fixed;
-    bottom:20px;
-    width:100%;
-    text-align:center;
+.slide:nth-child(2) {
+    background: url("bg.jpg") center/cover no-repeat;
 }
 
-.dot{
-    height:8px;
-    width:8px;
-    margin:0 5px;
-    background:rgba(255,255,255,0.4);
-    border-radius:50%;
-    display:inline-block;
-    cursor:pointer;
-}
-
-.dot.active{
-    background:white;
-}
-
-.telegram-btn{
-    margin-top:25px;
-    display:flex;
-    justify-content:center;
-}
-
-.telegram-btn a{
-    padding:12px 22px;
-    border-radius:30px;
-    text-decoration:none;
-    color:white;
-    font-size:15px;
-    background:rgba(255,255,255,0.08);
+.content-box {
+    background: rgba(0,0,0,0.7);
+    padding: 40px 60px;
+    border-radius: 20px;
     backdrop-filter: blur(10px);
-    border:1px solid rgba(255,255,255,0.15);
+    text-align: center;
 }
 
-/* музыка кнопка */
-.music-toggle{
-    position:fixed;
-    left:25px;
-    top:20px;
-    background:rgba(0,0,0,0.5);
-    padding:8px 14px;
-    border-radius:20px;
-    cursor:pointer;
-    backdrop-filter:blur(6px);
-    font-size:14px;
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
-.views{
-    position:fixed;
-    top:20px;
-    right:25px;
-    background:rgba(0,0,0,0.5);
-    padding:8px 14px;
-    border-radius:20px;
-    font-size:14px;
-    backdrop-filter:blur(6px);
+p {
+    margin-bottom: 20px;
+    opacity: 0.8;
 }
 
-@media(max-width:768px){
-    .card{
-        margin:20px;
-        padding:25px;
-    }
+button {
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: white;
+    color: black;
+}
+
+.music-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background: rgba(0,0,0,0.6);
+    cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<div class="music-toggle" onclick="toggleMusic()">🔊 Музыка</div>
+<div class="music-btn" id="musicToggle">🔇 Музыка</div>
 
-<div class="views">
-👁 <span id="viewCount">...</span>
-</div>
-
-<div class="slider-wrapper">
 <div class="slider" id="slider">
 
-<div class="card">
-<h1>Vyxbio</h1>
-<p>60 UC — 65₽</p>
-<div class="telegram-btn">
-<a href="https://t.me/vyxedith" target="_blank">Telegram</a>
-</div>
-</div>
+    <div class="slide" id="slide1">
+        <div class="content-box">
+            <h1>Vyxbio</h1>
+            <p>60 UC — 65₽</p>
+            <button onclick="nextSlide()">Telegram</button>
+        </div>
+    </div>
 
-<div class="card">
-<h1>Био</h1>
-<p>— информационное досье</p>
-<p>— оперативная аналитика</p>
-<p>— OSINT поиск</p>
-<p>— индивидуальное обучение</p>
-</div>
+    <div class="slide" id="slide2">
+        <div class="content-box">
+            <h1>Био</h1>
+            <p>
+                — информационное досье<br>
+                — оперативная аналитика<br>
+                — OSINT поиск<br>
+                — индивидуальное обучение
+            </p>
+        </div>
+    </div>
 
-</div>
-</div>
-
-<div class="dots">
-<span class="dot active" onclick="goSlide(0)"></span>
-<span class="dot" onclick="goSlide(1)"></span>
 </div>
 
 <audio id="bgMusic" src="music.mp3" loop></audio>
 
 <script>
-let current = 0;
 const slider = document.getElementById("slider");
-const dots = document.querySelectorAll(".dot");
-const music = document.getElementById("bgMusic");
+let current = 0;
 
-function goSlide(index){
-    current = index;
-    slider.style.transform = "translateX(-" + index*50 + "%)";
-    dots.forEach(d=>d.classList.remove("active"));
-    dots[index].classList.add("active");
+function updateSlide() {
+    slider.style.transform = `translateX(-${current * 100}vw)`;
 }
 
-/* свайп */
-let startX = 0;
-document.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
-});
-document.addEventListener("touchend", e=>{
-    let diff = startX - e.changedTouches[0].clientX;
-    if(diff > 50) goSlide((current+1)%2);
-    if(diff < -50) goSlide((current-1+2)%2);
-});
-
-/* Плавное включение */
-function fadeIn(){
-    music.volume = 0;
-    music.play();
-    let vol = 0;
-    let interval = setInterval(()=>{
-        if(vol < 1){
-            vol += 0.05;
-            music.volume = vol;
-        } else {
-            clearInterval(interval);
-        }
-    },200);
+function nextSlide() {
+    current = (current + 1) % 2;
+    updateSlide();
 }
 
-/* Плавное выключение */
-function fadeOut(){
-    let vol = music.volume;
-    let interval = setInterval(()=>{
-        if(vol > 0.05){
-            vol -= 0.05;
-            music.volume = vol;
-        } else {
-            music.pause();
-            clearInterval(interval);
-        }
-    },200);
-}
-
-let playing = false;
-function toggleMusic(){
-    if(!playing){
-        fadeIn();
-        playing = true;
-        document.querySelector(".music-toggle").innerText="🔇 Выкл";
-    } else {
-        fadeOut();
-        playing = false;
-        document.querySelector(".music-toggle").innerText="🔊 Музыка";
+document.body.addEventListener("click", function(e) {
+    if (!e.target.closest("button")) {
+        current = (current + 1) % 2;
+        updateSlide();
     }
+});
+
+// МУЗЫКА
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicToggle");
+
+music.volume = 0;
+
+function fadeInMusic() {
+    music.play().then(() => {
+        let vol = 0;
+        const fade = setInterval(() => {
+            if (vol < 1) {
+                vol += 0.05;
+                music.volume = vol;
+            } else {
+                clearInterval(fade);
+            }
+        }, 100);
+    }).catch(() => {});
 }
 
-/* счетчик */
-fetch("https://api.countapi.xyz/hit/vyxbio/visits")
-.then(res=>res.json())
-.then(data=>{
-    document.getElementById("viewCount").innerText = data.value;
+document.addEventListener("click", () => {
+    if (music.paused) fadeInMusic();
+}, { once: true });
+
+musicBtn.addEventListener("click", () => {
+    if (music.paused) {
+        fadeInMusic();
+        musicBtn.innerText = "🔊 Музыка";
+    } else {
+        music.pause();
+        musicBtn.innerText = "🔇 Музыка";
+    }
 });
 </script>
 
