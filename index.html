@@ -6,11 +6,7 @@
 <title>Vyxbio</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
     font-family: Arial, sans-serif;
@@ -23,6 +19,7 @@ body{
 
     background:url('https://fons.grizly.club/uploads/posts/2025-06/26/1750922652114.jpg') no-repeat center center;
     background-size:cover;
+    background-attachment:fixed;
 }
 
 /* затемнение */
@@ -31,35 +28,42 @@ body::before{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.65);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
     z-index:-1;
 }
 
-/* контейнер */
 .slider{
     width:100%;
-    max-width:600px;
+    max-width:650px;
     position:relative;
+    overflow:hidden;
 }
 
-/* карточка */
 .card{
     display:none;
     background:rgba(0,0,0,0.55);
-    backdrop-filter: blur(12px);
-    border-radius:20px;
+    backdrop-filter: blur(14px);
+    border-radius:22px;
     padding:40px;
     box-shadow:0 0 40px rgba(0,0,0,0.7);
-    animation:fadeIn 0.6s ease;
 }
 
 .card.active{
     display:block;
 }
 
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
+/* Анимация строк */
+.fade-line{
+    opacity:0;
+    transform:translateY(15px);
+    animation:lineFade 0.6s forwards;
+}
+
+@keyframes lineFade{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 h1{
@@ -69,21 +73,20 @@ h1{
 }
 
 h2{
-    margin-top:15px;
+    margin-top:18px;
     margin-bottom:10px;
     font-size:20px;
+    letter-spacing:1px;
 }
 
-ul{
-    list-style:none;
-}
+ul{list-style:none;}
 
 ul li{
     margin:6px 0;
     font-size:15px;
 }
 
-/* Telegram кнопка */
+/* Telegram */
 .telegram-btn{
     margin-top:25px;
     display:flex;
@@ -94,23 +97,22 @@ ul li{
     display:flex;
     align-items:center;
     gap:10px;
-    padding:12px 20px;
+    padding:12px 22px;
     border-radius:30px;
     text-decoration:none;
     color:white;
     font-size:15px;
 
     background:rgba(255,255,255,0.08);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
     border:1px solid rgba(255,255,255,0.15);
     transition:0.3s;
 }
 
 .telegram-btn a:hover{
-    background:rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.18);
 }
 
-/* прозрачная иконка */
 .telegram-btn svg{
     width:18px;
     height:18px;
@@ -144,45 +146,37 @@ ul li{
 
     body{
         padding:20px;
-        background-size:cover;
         background-position:center;
+        background-size:cover;
     }
 
     .card{
         padding:25px;
-        border-radius:16px;
+        border-radius:18px;
     }
 
-    h1{
-        font-size:24px;
-    }
-
-    h2{
-        font-size:17px;
-    }
-
-    ul li{
-        font-size:14px;
-    }
+    h1{font-size:23px;}
+    h2{font-size:16px;}
+    ul li{font-size:14px;}
 }
 </style>
 </head>
 <body>
 
-<div class="slider">
+<div class="slider" id="slider">
 
 <!-- Слайд 1 -->
 <div class="card active">
-<h1>Vyxbio Price</h1>
+<h1 class="fade-line" style="animation-delay:0.1s">Vyxbio</h1>
 
-<h2>UC PUBG</h2>
+<h2 class="fade-line" style="animation-delay:0.2s">UC PUBG</h2>
 <ul>
-<li>60 UC — 65₽</li>
-<li>325 UC — 299₽</li>
-<li>660 UC — 599₽</li>
+<li class="fade-line" style="animation-delay:0.3s">60 UC — 65₽</li>
+<li class="fade-line" style="animation-delay:0.4s">325 UC — 299₽</li>
+<li class="fade-line" style="animation-delay:0.5s">660 UC — 599₽</li>
 </ul>
 
-<div class="telegram-btn">
+<div class="telegram-btn fade-line" style="animation-delay:0.6s">
 <a href="https://t.me/vyxedith" target="_blank">
 <svg viewBox="0 0 24 24">
 <path d="M9.04 15.47l-.39 4.12c.56 0 .8-.24 1.1-.53l2.64-2.52 5.48 4.01c1 .55 1.72.26 1.97-.93l3.57-16.73c.33-1.54-.56-2.14-1.53-1.78L1.47 9.23c-1.5.59-1.48 1.42-.27 1.8l5.9 1.84L19.44 4.5c.58-.36 1.1-.16.66.2"/>
@@ -194,13 +188,23 @@ Telegram
 
 <!-- Слайд 2 -->
 <div class="card">
-<h1>Информация</h1>
+<h1>Био</h1>
 
+<h2>Увлекался ранее</h2>
 <ul>
-<li>Быстрая выдача</li>
-<li>Поддержка 24/7</li>
-<li>Безопасная сделка</li>
-<li>Гарантия</li>
+<li>— информационным досье</li>
+<li>— оперативной аналитикой</li>
+<li>— OSINT поиском</li>
+</ul>
+
+<h2>ОБУЧАЛСЯ</h2>
+<ul>
+<li>— индивидуальной программой</li>
+</ul>
+
+<h2>ИСПОЛЬЗОВАЛ</h2>
+<ul>
+<li>— инструменты и практику</li>
 </ul>
 
 <div class="telegram-btn">
@@ -224,6 +228,7 @@ Telegram
 let current = 0;
 const slides = document.querySelectorAll(".card");
 const dots = document.querySelectorAll(".dot");
+const slider = document.getElementById("slider");
 
 function showSlide(index){
     slides[current].classList.remove("active");
@@ -234,6 +239,25 @@ function showSlide(index){
     slides[current].classList.add("active");
     dots[current].classList.add("active");
 }
+
+/* свайп */
+let startX = 0;
+
+slider.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend", e=>{
+    let endX = e.changedTouches[0].clientX;
+    let diff = startX - endX;
+
+    if(diff > 50){
+        showSlide((current+1) % slides.length);
+    }
+    if(diff < -50){
+        showSlide((current-1+slides.length) % slides.length);
+    }
+});
 </script>
 
 </body>
