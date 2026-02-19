@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bio</title>
+<title>Vyxbio</title>
 
 <style>
 * {
@@ -13,98 +13,43 @@
 }
 
 body {
-    background: #0a0a0a;
-    font-family: 'Georgia', serif;
-    color: #eaeaea;
-    overflow: hidden;
-}
-
-/* Фон */
-.background {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url("https://images.unsplash.com/photo-1601758003122-53c40e686a19?q=80&w=2070") center right/contain no-repeat;
-    background-color: #0a0a0a;
-    filter: brightness(25%) blur(2px);
-    z-index: -1;
-}
-
-/* Слайдер */
-.container {
-    display: flex;
-    width: 200%;
     height: 100vh;
-    transition: transform 0.8s cubic-bezier(.77,0,.18,1);
-}
-
-.page {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* Карточка */
-.card {
-    background: rgba(20,20,20,0.75);
-    backdrop-filter: blur(12px);
-    padding: 45px 65px;
-    border-radius: 22px;
-    box-shadow: 0 0 60px rgba(0,0,0,0.8);
-    width: 520px;
-    animation: fadeIn 1.2s ease forwards;
-}
-
-h1 {
+    font-family: Arial, sans-serif;
+    color: white;
     text-align: center;
-    font-weight: 400;
-    font-size: 32px;
-    margin-bottom: 30px;
+
+    /* Фон */
+    background: url('https://fons.grizly.club/uploads/posts/2025-06/26/1750922652114.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* затемнение фона */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+/* контейнер */
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+/* строки */
+.line {
     opacity: 0;
-    transform: translateY(-15px);
-    animation: slideDown 1s ease forwards 0.3s;
+    transform: translateY(20px);
+    animation: fadeUp 1.5s forwards;
 }
 
-.section {
-    margin-bottom: 25px;
-    opacity: 0;
-    transform: translateY(15px);
-    animation: fadeUp 1s ease forwards;
-}
-
-.section:nth-child(2) { animation-delay: 0.6s; }
-.section:nth-child(3) { animation-delay: 0.9s; }
-.section:nth-child(4) { animation-delay: 1.2s; }
-
-.section-title {
-    font-size: 18px;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-ul {
-    list-style: none;
-}
-
-li {
-    margin: 6px 0;
-    font-size: 15px;
-    opacity: 0.85;
-}
-
-/* Анимации */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideDown {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+.line:nth-child(1) { animation-delay: 0.5s; }
+.line:nth-child(2) { animation-delay: 2s; }
+.line:nth-child(3) { animation-delay: 3.5s; }
 
 @keyframes fadeUp {
     to {
@@ -113,106 +58,24 @@ li {
     }
 }
 
-/* Точки */
-.dots {
-    position: fixed;
-    bottom: 25px;
-    width: 100%;
-    text-align: center;
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
 }
 
-.dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin: 0 6px;
-    background: white;
-    opacity: 0.3;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-
-.dot.active {
-    opacity: 1;
+p {
+    font-size: 20px;
+    margin: 10px 0;
 }
 </style>
 </head>
 <body>
 
-<div class="background"></div>
-
-<div class="container" id="slider">
-
-    <!-- Страница 1 -->
-    <div class="page">
-        <div class="card">
-            <h1>реквием bio</h1>
-
-            <div class="section">
-                <div class="section-title">РАССЛЕДОВАНИЯ</div>
-                <ul>
-                    <li>— информационное досье</li>
-                    <li>— оперативная аналитика</li>
-                    <li>— OSINT поиск</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <div class="section-title">ОБУЧЕНИЕ</div>
-                <ul>
-                    <li>— индивидуальная программа</li>
-                    <li>— инструменты и практика</li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Страница 2 -->
-    <div class="page">
-        <div class="card">
-            <h1>контакты</h1>
-
-            <div class="section">
-                <ul>
-                    <li>Telegram: @username</li>
-                    <li>Discord: username#0000</li>
-                    <li>GitHub: github.com/username</li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-
+<div class="content">
+    <h1 class="line">Vyxbio</h1>
+    <p class="line">Добро пожаловать</p>
+    <p class="line">Лучшие UC PUBG по выгодной цене</p>
 </div>
-
-<div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-</div>
-
-<script>
-let current = 0;
-const slider = document.getElementById("slider");
-const dots = document.querySelectorAll(".dot");
-
-function updateSlider() {
-    slider.style.transform = `translateX(-${current * 50}%)`;
-    dots.forEach(dot => dot.classList.remove("active"));
-    dots[current].classList.add("active");
-}
-
-document.addEventListener("keydown", function(e) {
-    if (e.key === "ArrowRight" && current < 1) {
-        current++;
-        updateSlider();
-    }
-    if (e.key === "ArrowLeft" && current > 0) {
-        current--;
-        updateSlider();
-    }
-});
-</script>
 
 </body>
 </html>
